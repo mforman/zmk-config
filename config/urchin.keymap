@@ -1,0 +1,11 @@
+/* activate bluetooth */
+#define CONFIG_WIRELESS 1
+
+/* source key position labels */
+#include "zmk-helpers/key-labels/34.h"
+
+/* Urchin only has 2 two thumb keys */ 
+#define THUMBS LH1 LH0 RH0 RH1
+
+/* source the main keymap */
+#include "base.keymap"

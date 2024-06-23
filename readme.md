@@ -1,12 +1,9 @@
-# urob's zmk-config
+# mforman's fork of urob's zmk-config
 
 This is my personal [ZMK firmware](https://github.com/zmkfirmware/zmk/)
-configuration. It consists of a 34-keys base layout that is re-used for various
-boards, including my Corneish Zen and my Planck.
+configuration. It consists of a 34-keys base layout that is used for the Urchin, and maybe a corne one day if I replace the controllers with NiceNano!.
 
-This branch is updated for the latest ZMK using Zephyr 3.5. A legacy version
-compatible with Zephyr 3.0 is available
-[here](https://github.com/urob/zmk-config/tree/main-zephyr-3.0).
+This branch is updated for the latest ZMK using Zephyr 3.5. 
 
 ## Highlights
 
@@ -16,17 +13,17 @@ compatible with Zephyr 3.0 is available
   keys and are re-used for multiple keyboards. The configuration is fit onto
   larger boards by padding it via a modular structure of "extra keys"
 - ["timeless" homerow mods](#timeless-homerow-mods)
-- combos replacing the symbol layer
+- ~~Combos replacing the symbol layer~~
 - smart numbers and smart mouse layers that automatically toggle off when done
 - sticky shift on right thumb, double-tap (or shift + tap)[^1] activates
   caps-word
 - arrow-cluster doubles as <kbd>home</kbd>, <kbd>end</kbd>, <kbd>begin/end of
   document</kbd> on long-press
-- more intuitive shift-actions: <kbd>, ;</kbd>, <kbd>. :</kbd> and <kbd>?
-  !</kbd>
-- <kbd>shift</kbd> + <kbd>space</kbd> morphs into <kbd>dot</kbd> →
-  <kbd>space</kbd> → <kbd>sticky-shift</kbd>
-- "Greek" layer for mathematical typesetting (activated as sticky-layer via a
+- ~~more intuitive shift-actions: <kbd>, ;</kbd>, <kbd>. :</kbd> and <kbd>?
+  !</kbd>~~
+- ~~<kbd>shift</kbd> + <kbd>space</kbd> morphs into <kbd>dot</kbd> →
+  <kbd>space</kbd> → <kbd>sticky-shift</kbd>~~ Just the sticky shift for me.
+- ~~"Greek" layer for mathematical typesetting~~ "French" unicode symbols (activated as sticky-layer via a
   combo)
 - modified Github Actions workflow that recognizes git-submodules
 - automated
@@ -163,34 +160,28 @@ smaller (and larger) things to try.
   flavor to `tap-preferred`, which requires holding HRMs past tapping term to
   activate)
 
-## Using combos instead of a symbol layer
+## Combos and symbols
 
-I am a big fan of combos for all sort of things. In terms of comfort, I much
+I am a big fan of combos for all sort of things. ~~In terms of comfort, I much
 prefer them over accessing layers that involve lateral thumb movements to be
 activated, especially when switching between different layers in rapid
-succession.
+succession.~~
+
+Use homerow shift on the num layer for `!`, `@`, `#`, etc
+
+The right hand of the num layer has the other symbols arranged in a nice symetrical way.
+This is inspired by the [BEAKL 15 Symbol Layer](https://deskthority.net/wiki/BEAKL#BEAKL_15)
 
 One common concern about overloading the layout with combos is that they lead to
 misfires. Fortunately, the above-mentioned `require-prior-idle-ms` option also
 works for combos, which in my experience all but completely eliminates the
 problem -- even when rolling keys on the home row!
 
-My combo layout aims to place the most used symbols in easy-to-access locations
-while also making them easy to remember. Specifically:
+My combos:
 
-- the top vertical-combo row matches the symbols on a standard numbers row
-  (except `+` and `&` being swapped)
-- the bottom vertical-combo row is symmetric to the top row (subscript `_`
-  aligns with superscript `^`; minus `-` aligns with `+`; division `/` aligns
-  with multiplication `*`; logical-or `|` aligns with logical-and `&`)
-- parenthesis, braces, brackets are set up symmetrically as horizontal combos
-  with `<`, `>`, `{` and `}` being accessed from the Navigation layer (or when
-  combined with `Shift`)
-- left-hand side combos for `tap`, `esc`, `enter`, `cut` (on <kbd>X</kbd> +
+- vim (`:` and `esc`) and tmux (`-` and `\` for split panes) in the home block
+- left-hand side combos for `esc`, `cut` (on <kbd>X</kbd> +
   <kbd>D</kbd>), `copy` and `paste` that go well with right-handed mouse usage
-- <kbd>L</kbd> + <kbd>Y</kbd> switches to the Greek layer for a single key
-  press, <kbd>L</kbd> + <kbd>U</kbd> + <kbd>Y</kbd> activates one-shot shift in
-  addition
 - <kbd>W</kbd> + <kbd>P</kbd> activates the smart mouse layer
 
 ## Smart layers and other gimmicks
@@ -247,18 +238,9 @@ operations (which are accessible via the dedicated `begin/end document keys`.)
 
 ##### Swapper
 
-I am using [Nick Conway](https://github.com/nickconway)'s fantastic
+~~I am using [Nick Conway](https://github.com/nickconway)'s fantastic
 [tri-state](https://github.com/zmkfirmware/zmk/pull/1366) behavior for a
-one-handed Alt-Tab switcher (`PWin` and `NWin`).
-
-##### Repeat
-
-I recently switched to 25g-chocs on one of my keyboards. I already was very
-happy with my combos prior to that (even with heavy-ish MX-switches). But with
-the light chocs, I find that I can now even use them for regular typing. While I
-haven't yet tried placing alphas on combos, I am currently experimenting with a
-`repeat` combo on my home row that I use to reduce SFUs when typing
-double-letter words.
+one-handed Alt-Tab switcher (`PWin` and `NWin`).~~
 
 ## Issues and workarounds
 
