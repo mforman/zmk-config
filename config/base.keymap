@@ -100,9 +100,10 @@ MASK_MODS(masked_end,  (MOD_LCTL), &kp END)
 // tap: space | hold: ctrl
 #define CTL_SPC &thumb_key LCTL SPACE
 ZMK_HOLD_TAP(thumb_key,
-    flavor="hold-preferred";
+    flavor="tap-preferred";
     tapping-term-ms = <200>;
-    quick-tap-ms = <QUICK_TAP_MS>;
+    quick-tap-ms = <200>;
+    require-prior-idle-ms = <125>;
     bindings = <&kp>, <&kp>;
 )
 
