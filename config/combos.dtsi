@@ -11,14 +11,16 @@
 #define COMBO_IDLE 50
 
 // make homerow combos tap-only (so HRMs can be chorded instantaneously)
-#define HRC_TAB    &hml         LS(LCTRL) TAB
-#define HRC_BSPC   &hml         LS(LALT)  BSPC
+#define HRC_TAB    &hml         LS(LCTRL)     TAB
+#define HRC_BSPC   &hml         LS(LALT)      BSPC
+#define HRC_BSWD   &hml         LG(LS(LALT))  LC(BSPC)
 
 /* Horizontal combos - left hand */
 ZMK_COMBO(esc,   &kp ESC,       LT3 LT2,     DEFAULT, COMBO_TERM, COMBO_IDLE)
 ZMK_COMBO(mouse, &smart_mouse,  LT3 LT1,     DEFAULT, COMBO_TERM, COMBO_IDLE)
 
-ZMK_COMBO(bspcl, HRC_BSPC  ,    LM3 LM2,     DEFAULT, COMBO_TERM, COMBO_IDLE)
+ZMK_COMBO(bspcl, HRC_BSPC,      LM3 LM2,     DEFAULT, COMBO_TERM, COMBO_IDLE)
+ZMK_COMBO(bspwd, HRC_BSWD,      LM4 LM3 LM2, DEFAULT, COMBO_TERM, COMBO_IDLE)
 ZMK_COMBO(tab,   HRC_TAB,       LM2 LM1,     DEFAULT, COMBO_TERM, COMBO_IDLE)
 
 ZMK_COMBO(cut,   &kp LC(X),     LB3 LB1,     DEFAULT, COMBO_TERM, COMBO_IDLE)
