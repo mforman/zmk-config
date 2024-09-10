@@ -65,9 +65,9 @@
 MAKE_HRM(hml, &kp, &kp, KEYS_R THUMBS)  // left-hand HRMs
 MAKE_HRM(hmr, &kp, &kp, KEYS_L THUMBS)  // right-hand HRMs
 
-#define HMR_LPAR  &hmr RCTRL LPAR
+#define HMR_LBKT  &hmr RCTRL LBKT
 #define HMR_EQUAL &hmr RSHFT EQUAL  
-#define HMR_RPAR  &hmr LALT  RPAR
+#define HMR_RBKT  &hmr LALT  RBKT
 
 /* Nav cluster */
 
@@ -210,9 +210,9 @@ ZMK_LAYER(lower,
 
 ZMK_LAYER(raise,
 //╭──────╮ ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮ ╭──────╮ ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮ ╭──────╮
-    X_LT     ___           &kp N7        &kp N8        &kp N9        ___             X_MT     ___           &kp LBKT      &kp PIPE      &kp RBKT      &kp GRAVE       X_RT
+    X_LT     ___           &kp N7        &kp N8        &kp N9        ___             X_MT     ___           &kp LPAR      &kp PIPE      &kp RPAR      &kp GRAVE       X_RT
 //├──────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├──────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├──────┤
-    X_LM   &hml LGUI STAR  &hml LALT N4  &hml LSHFT N5 &hml LCTRL N6 &kp PLUS        X_MM     ___           HMR_LPAR      HMR_EQUAL     HMR_RPAR      &sk RGUI        X_RM
+    X_LM   &hml LGUI STAR  &hml LALT N4  &hml LSHFT N5 &hml LCTRL N6 &kp PLUS        X_MM     ___           HMR_LBKT      HMR_EQUAL     HMR_RBKT      &sk RGUI        X_RM
 //├──────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├──────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├──────┤
     X_LB     ___           &kp N1        &kp N2        &kp N3        &kp DOT         X_MB     ___           &kp LBRC      &kp TILDE     &kp RBRC      &kp BSLH        X_RB
 //├──────┤ ╰─────────────┼─────────────┴─────────────┼─────────────┼─────────────┤ ├──────┤ ├─────────────┼─────────────┼─────────────┴───────────────────────────╯ ├──────┤
