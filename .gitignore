@@ -5,5 +5,7 @@ modules
 firmware
 zephyr
 zmk
+nice-view-battery
+urchin-zmk-module
 draw/base.yaml
 draw/overview.yaml
