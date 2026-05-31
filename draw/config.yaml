@@ -20,52 +20,12 @@ parse_config:
     "&kp LC(X)": Cut
     "&kp LS(INS)": Paste
 
-    "&kp LG(LC(LEFT))": Prev Desk
-    "&kp LG(LC(RIGHT))": Next Desk
-    "&kp LG(LC(LS(A)))": Pin App
-    "&kp LG(LC(LS(Q)))": Pin Win
-
-    "&swapper": Next Win
-    "&kp LS(TAB)": Prev Win
-    "&dot_spc": Sentence
-    "&num_dance": { "t": "Numword", "s": "Sticky Num" }
     "&magic_shift": { "t": Magic, "h": "Shift" }
-    "&smart_mouse": Smart Mouse
-
-    "&hml LS(LALT)TAB": Tab
-    "&hm_combo_ldr": Leader
-    "&hm_combo_ldrsh": Shift+Leader
-    "&hm_combo_lpar": { "t": "(", "right": "<" }
-    "&hm_combo_rpar": { "t": ")", "right": ">" }
-    "&kp LBKT": { "t": "[", "right": "{" }
-    "&kp RBKT": { "t": "]", "right": "}" }
-
-    "&mmv MOVE_UP": Mouse ↑
-    "&mmv MOVE_DOWN": Mouse ↓
-    "&mmv MOVE_LEFT": Mouse ←
-    "&mmv MOVE_RIGHT": Mouse →
-
-    "&msc SCRL_UP": Scroll ↑
-    "&msc SCRL_DOWN": Scroll ↓
-    "&msc SCRL_LEFT": Scroll ←
-    "&msc SCRL_RIGHT": Scroll →
-
-    "&mkp LCLK": Left Click
-    "&mkp RCLK": Right Click
-    "&mkp MCLK": Middle Click
-    "&mkp MB4": Back Click
-    "&mkp MB5": Forward Click
 
   trans_legend: { "t": "", "type": "trans" }
 
   zmk_combos:
     combo_cut: { align: bottom, o: 0.15 }
-    combo_ldrsh: { align: top, o: 1.35 }
-
-    combo_lt: { hidden: true }
-    combo_gt: { hidden: true }
-    combo_lbrc: { hidden: true }
-    combo_rbrc: { hidden: true }
 
   zmk_keycode_map:
     # custom mappings
