@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-Personal [ZMK firmware](https://zmk.dev) configuration for a 34-key **Urchin** split keyboard, forked from [urob/zmk-config](https://github.com/urob/zmk-config). Pinned to **ZMK v0.3.0** and **urob modules v0.3**. The Nix flake + direnv provides a fully isolated build environment; no system-level toolchain install is needed.
+Personal [ZMK firmware](https://zmk.dev) configuration for a 34-key **Urchin** split keyboard, forked from [urob/zmk-config](https://github.com/urob/zmk-config). Pinned to **ZMK `main`** (Zephyr 4.1 / lvgl 9 era) with **urob modules** at matching `main` commits. The Nix flake + direnv provides a fully isolated build environment; no system-level toolchain install is needed.
 
 ## Build environment
 
@@ -48,7 +48,7 @@ config/          — ZMK user config (the only thing you normally edit)
   combos.dtsi    — combo definitions, sourced from base.keymap
 build.yaml       — GitHub Actions / just build matrix (board + shield combos)
 Justfile         — build recipes wrapping west
-flake.nix        — Nix dev shell (Zephyr SDK 0.16.9, python-yq, keymap-drawer)
+flake.nix        — Nix dev shell (Zephyr SDK 0.16.x, python-yq, keymap-drawer)
 zmk/             — ZMK source (managed by west, do not edit directly)
 zephyr/          — Zephyr RTOS (managed by west, do not edit directly)
 modules/zmk/     — urob ZMK modules: adaptive-key, auto-layer, helpers, tri-state
@@ -75,13 +75,16 @@ Combos are in `config/combos.dtsi` using `ZMK_COMBO` macros from zmk-helpers. Ke
 
 ## Dependency pinning
 
-`config/west.yml` controls everything:
-- `defaults.revision: v0.3` — applies to all urob-remote modules (adaptive-key, auto-layer, helpers, tri-state)
-- `zmk` is explicitly pinned to `revision: v0.3.0` on the zmkfirmware remote
-- `zephyr` is overridden to `v3.5.0+zmk-fixes` on the urob remote (ZMK v0.3.0 requires this exact fork)
-- `urchin-zmk-module` and `nice-view-battery` track `main`
+`config/west.yml` controls everything (every project is pinned explicitly to a commit, mirroring urob's `main` manifest):
+- `zmk` → a `main` commit on the zmkfirmware remote (Zephyr 4.1 era)
+- urob modules (adaptive-key, auto-layer, helpers, tri-state) → matching `main` commits on the urob remote
+- `zephyr` → `v4.1.0+zmk-fixes` on the zmkfirmware remote, with a `name-allowlist`; **keep `lvgl`** in it (the nice_view display needs it) and `mbedtls`
+- `urchin-zmk-module` (duckyb) tracks `main`
+- Board ID is `nice_nano//zmk` in `build.yaml` (ZMK `main` renamed it from `nice_nano_v2`)
 
-**Do not upgrade the `flake.nix`/`flake.lock`** when bumping ZMK unless Zephyr's major version also changes — the Nix SDK must match the Zephyr version. The current flake targets Zephyr SDK 0.16.9 / Zephyr 3.5.
+The display uses ZMK's **stock `nice_view`** shield. The third-party `nice-view-battery` widget was dropped: its lvgl-9 port (a community fork) hung the firmware at runtime. Stock `nice_view` still shows battery, output/profile status, and layer.
+
+**Do not upgrade the `flake.nix`/`flake.lock`** unless Zephyr's major version also changes — the Nix SDK (0.16.x) must match the Zephyr version. The flake's `libatomic` shim and `LD_LIBRARY_PATH` export are guarded to Linux only; on macOS `libatomic.so` doesn't exist and the unguarded version breaks `nix develop`.
 
 ## Adding or changing behaviors
 

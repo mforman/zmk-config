@@ -24,8 +24,6 @@ manifest:
       url-base: https://github.com/urob
     - name: duckyb
       url-base: https://github.com/duckyb
-    - name: geratrevino
-      url-base: https://github.com/geratrevino115
 
   projects:
     - name: zmk
@@ -36,10 +34,6 @@ manifest:
     - name: urchin-zmk-module
       remote: duckyb
       revision: main
-
-    - name: nice-view-battery
-      remote: geratrevino
-      revision: d1f68d33cd15c1df5ac6c487872a3a2ace8f8f33 # lvgl-9 / ZMK-4.1 port (5/11/2026)
 
     # ZMK modules
     - name: zmk-adaptive-key
