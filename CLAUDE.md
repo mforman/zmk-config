@@ -37,6 +37,21 @@ After `just update`, always run `direnv exec . west zephyr-export` before buildi
 
 Firmware lands in `firmware/*.uf2`. Flash by double-tapping the reset button to enter UF2 bootloader mode, then copy the file.
 
+### Debug builds (connectivity troubleshooting)
+
+`build-debug.yaml` is a second build matrix that adds ZMK's `zmk-usb-logging`
+snippet, so each half streams logs over USB CDC ACM:
+
+```bash
+just build_matrix=build-debug.yaml build all
+```
+
+Artifacts get a `-debug` suffix (`firmware/urchin_left-debug.uf2`) so they never
+overwrite the normal output, and CI ignores this matrix. Read the stream with
+`picocom -b 115200 /dev/ttyACM0` (Linux) or `screen /dev/tty.usbmodem* 115200`
+(macOS). Don't leave debug firmware flashed for daily use — USB logging holds
+the USB stack up and raises power draw.
+
 ## Repository layout
 
 ```

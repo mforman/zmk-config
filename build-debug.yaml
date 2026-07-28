@@ -1,0 +1,32 @@
+# Debug build matrix. Not used by CI -- CI reads build.yaml.
+#
+# Produces the same firmware as build.yaml but with the zmk-usb-logging
+# snippet enabled, so the halves emit a log stream over USB CDC ACM. Use it
+# to diagnose connectivity problems; do not leave this firmware flashed for
+# daily use (USB logging keeps the USB stack up and increases power draw).
+#
+#   just build_matrix=build-debug.yaml build all
+#
+# Artifacts land in firmware/ with a -debug suffix so they never overwrite
+# the normal build output.
+#
+# Then attach each half over USB and read the log stream, e.g.
+#
+#   picocom -b 115200 /dev/ttyACM0        # Linux
+#   screen /dev/tty.usbmodem* 115200      # macOS
+#
+# Flash the left (central) half first and watch it discover the right half,
+# then watch the host connection come up. `bt` / `ble` lines carry the
+# connection, pairing and disconnect reasons.
+---
+include:
+  - board: nice_nano//zmk
+    shield: urchin_left nice_view_adapter nice_view
+    snippet: zmk-usb-logging
+    artifact-name: urchin_left-debug
+    cmake-args: -DCONFIG_ZMK_LOG_LEVEL_DBG=y -DCONFIG_BT_LOG_LEVEL_INF=y
+  - board: nice_nano//zmk
+    shield: urchin_right nice_view_adapter nice_view
+    snippet: zmk-usb-logging
+    artifact-name: urchin_right-debug
+    cmake-args: -DCONFIG_ZMK_LOG_LEVEL_DBG=y -DCONFIG_BT_LOG_LEVEL_INF=y

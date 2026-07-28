@@ -33,7 +33,7 @@ manifest:
 
     - name: urchin-zmk-module
       remote: duckyb
-      revision: main
+      revision: a3ab64fa7779f82675695f3d7d17f705f840da25 # main (11/14/2024)
 
     # ZMK modules
     - name: zmk-adaptive-key
