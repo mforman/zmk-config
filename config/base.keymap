@@ -6,8 +6,15 @@
   #include <dt-bindings/zmk/outputs.h>
   #define _BT_SEL_KEYS_                                                        \
       &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_CLR
+  // Toggle the preferred output between USB and BLE. ZMK defaults the
+  // preference to USB whenever CONFIG_ZMK_USB is set (it is, on nice_nano), so
+  // without this key there is no way to keep sending over BLE while the board
+  // is plugged into a computer -- and no way to restore the preference after a
+  // settings reset wipes it.
+  #define _OUT_TOG_ &out OUT_TOG
 #else
   #define _BT_SEL_KEYS_ &trans &trans &trans &trans &trans
+  #define _OUT_TOG_ &trans
 #endif
 
 #include "zmk-helpers/helper.h"
@@ -184,7 +191,7 @@ ZMK_BASE_LAYER(raise,
 
 ZMK_BASE_LAYER(adjust,
 //╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮ ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
-                               _BT_SEL_KEYS_                            ,   ___           &kp C_PP      &kp C_VOL_UP  &kp C_MUTE    ___         ,
+                               _BT_SEL_KEYS_                            ,   _OUT_TOG_     &kp C_PP      &kp C_VOL_UP  &kp C_MUTE    ___         ,
 //├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
     ___           ___           ___           ___           &bootloader ,   &bootloader   &kp C_PREV    &kp C_VOL_DN  &kp C_NEXT    ___         ,
 //├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
