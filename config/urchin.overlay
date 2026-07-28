@@ -1,0 +1,33 @@
+/*
+ * Re-enable the nRF52840's main (REG1) DC/DC converter.
+ *
+ * Before the 31 May 2026 upgrade the board was `nice_nano_v2`, whose ZMK
+ * board definition carried:
+ *
+ *     config BOARD_ENABLE_DCDC
+ *         bool "Enable DCDC mode"
+ *         select SOC_DCDC_NRF52X
+ *         default y
+ *
+ * so REG1 ran in DC/DC mode. The HWMv2 migration (ZMK `feat!: Move to zephyr
+ * v4.1`) deleted app/boards/arm/nice_nano/ along with that Kconfig, and the
+ * replacement overlay for nice_nano//zmk rev 2.0.0 only sets
+ * `&reg0 { status = "okay"; }` -- it never overrides REG1, which Zephyr's
+ * nrf52840.dtsi defaults to `regulator-initial-mode = <NRF5X_REG_MODE_LDO>`.
+ *
+ * Net effect of the upgrade: REG0 (VDDH) gained DC/DC, but REG1 (main core +
+ * radio supply) silently dropped from DC/DC to LDO. LDO mode roughly doubles
+ * supply current and has a much worse transient response, which matters here
+ * because urchin.conf also sets CONFIG_BT_CTLR_TX_PWR_PLUS_8=y -- the highest
+ * TX power the nRF52840 offers, and its largest current spikes.
+ *
+ * Zephyr still honours the deprecated CONFIG_SOC_DCDC_NRF52X, but that symbol
+ * has no prompt so it cannot be set from a .conf file; the devicetree property
+ * below is the supported route (see soc/nordic/nrf52/Kconfig).
+ */
+
+#include <zephyr/dt-bindings/regulator/nrf5x.h>
+
+&reg1 {
+    regulator-initial-mode = <NRF5X_REG_MODE_DCDC>;
+};
